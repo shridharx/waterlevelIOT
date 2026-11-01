@@ -1,0 +1,33 @@
+# Render Blueprint - deploy this project with "New +" -> "Blueprint".
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: smart-water-monitoring
+    runtime: node
+    plan: free
+    region: singapore          # change to oregon / frankfurt / ohio if closer
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.1
+      # Generated once by Render. Open the service -> Environment, copy the
+      # value and paste it into firmware/water_monitor.ino (DEVICE_API_KEY).
+      - key: DEVICE_API_KEY
+        generateValue: true
+      - key: DEVICE_ID
+        value: esp32-water-01
+      - key: OFFLINE_AFTER_MS
+        value: "15000"
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: ALERT_LOW_PERCENT
+        value: "25"
+      - key: ALERT_FULL_PERCENT
+        value: "90"
+      # Optional Telegram alerts: add TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID
+      # in the Render dashboard (Environment) after the first deploy.
+      # Alerts stay disabled while they are missing.

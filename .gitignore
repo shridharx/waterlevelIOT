@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Secrets — never commit real credentials
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+venv/
+.venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build artefacts
+build/
+*.bin
+*.elf
